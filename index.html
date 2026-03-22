@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sport Club Corinthians Paulista</title>
+  <meta name="description" content="Site completo do Sport Club Corinthians Paulista com elenco, escalacao interativa e informacoes do clube." />
+  <link rel="stylesheet" href="style.css" />
+  <!-- Fonte profissional -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ==================== HEADER ==================== -->
+  <header id="header">
+    <div class="container header-inner">
+      <!-- Logo / Escudo -->
+      <div class="brand">
+        <img
+          src="logo.01.png"
+          alt="Escudo do Corinthians"
+          class="brand-logo"
+        />
+        <div class="brand-text">
+          <h1>CORINTHIANS</h1>
+          <span>Sport Club Corinthians Paulista</span>
+        </div>
+      </div>
+
+      <!-- Menu de navegacao -->
+      <nav id="mainNav" class="nav" aria-label="Navegacao principal">
+        <a href="#hero" class="nav-link">Inicio</a>
+        <a href="#elenco" class="nav-link">Elenco</a>
+        <a href="#escalacao" class="nav-link">Escalacao</a>
+        <a href="#sobre" class="nav-link">Sobre</a>
+      </nav>
+
+      <!-- Botao hamburger (mobile) -->
+      <button class="hamburger" id="hamburgerBtn" type="button" aria-label="Abrir menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ==================== HERO ==================== -->
+  <section id="hero" class="hero">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <img
+        src="logo.01.png"
+        alt="Escudo Corinthians"
+        class="hero-badge"
+      />
+      <h2 class="hero-title">SPORT CLUB<br/>CORINTHIANS PAULISTA</h2>
+      <p class="hero-subtitle">Fiel desde 1910 &mdash; O Timao do Povo</p>
+      <div class="hero-buttons">
+        <a href="#elenco" class="btn btn-primary">Ver Elenco</a>
+        <a href="#escalacao" class="btn btn-outline">Monte sua Escalacao</a>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <!-- ==================== ELENCO ==================== -->
+    <section id="elenco" class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">ELENCO 2026</h2>
+          <div class="section-bar"></div>
+          <p class="section-sub">Plantel completo do Sport Club Corinthians Paulista para a temporada 2026</p>
+        </div>
+
+        <!-- Filtros de posicao -->
+        <div class="filters" id="squadFilters"></div>
+
+        <!-- Grid de jogadores (renderizado via JS) -->
+        <div class="players-grid" id="squadGrid" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- ==================== ESCALACAO ==================== -->
+    <section id="escalacao" class="section section-dark">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">MONTE SUA ESCALACAO</h2>
+          <div class="section-bar"></div>
+          <p class="section-sub">Clique em uma posicao no campo e escolha o jogador</p>
+        </div>
+
+        <!-- Barra de formacoes -->
+        <div class="formation-bar">
+          <span class="formation-label">Formacao:</span>
+          <div id="formationButtons" class="formation-buttons"></div>
+          <button class="btn btn-small btn-outline" id="btnClearAll" type="button">Limpar Tudo</button>
+        </div>
+
+        <!-- Layout: campo + painel lateral -->
+        <div class="lineup-layout">
+          <!-- Campo de futebol -->
+          <div class="field-container">
+            <div class="field-wrap">
+              <div class="field-aspect"></div>
+              <div class="field" aria-label="Campo de futebol">
+                <div class="stripes" aria-hidden="true"></div>
+                <div class="halfline" aria-hidden="true"></div>
+                <div class="center-circle" aria-hidden="true"></div>
+                <div class="center-dot" aria-hidden="true"></div>
+                <div class="box-bottom" aria-hidden="true"></div>
+                <div class="box-top" aria-hidden="true"></div>
+                <div class="smallbox-bottom" aria-hidden="true"></div>
+                <div class="smallbox-top" aria-hidden="true"></div>
+                <div class="outline" aria-hidden="true"></div>
+                <div id="slotsLayer"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Painel de selecao de jogadores -->
+          <aside class="picker-panel">
+            <h3 id="pickerTitle">Selecione uma posicao no campo</h3>
+            <input
+              id="playerSearch"
+              class="search-input"
+              type="text"
+              placeholder="Buscar jogador..."
+              autocomplete="off"
+            />
+            <div class="picker-list" id="playerPickerList" aria-live="polite"></div>
+            <div id="pickerEmpty" class="picker-empty" style="display:none;"></div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SOBRE O CLUBE ==================== -->
+    <section id="sobre" class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">SOBRE O CLUBE</h2>
+          <div class="section-bar"></div>
+        </div>
+        <div class="about-grid">
+          <div class="about-card">
+            <div class="about-icon">&#127942;</div>
+            <h3>Fundacao</h3>
+            <p>Fundado em 1 de setembro de 1910 no bairro do Bom Retiro, em Sao Paulo, por um grupo de operarios.</p>
+          </div>
+          <div class="about-card">
+            <div class="about-icon">&#127941;</div>
+            <h3>Titulos</h3>
+            <p>7x Campeonato Brasileiro, 3x Copa do Brasil, 2x Libertadores, 2x Mundial de Clubes, 30x Paulistao.</p>
+          </div>
+          <div class="about-card">
+            <div class="about-icon">&#127967;</div>
+            <h3>Estadio</h3>
+            <p>Neo Quimica Arena (Arena Corinthians), inaugurada em 2014, com capacidade para mais de 49 mil torcedores.</p>
+          </div>
+          <div class="about-card">
+            <div class="about-icon">&#9829;</div>
+            <h3>Torcida</h3>
+            <p>A Fiel Torcida e uma das maiores e mais apaixonadas do mundo, com mais de 30 milhoes de torcedores.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== MODAL DO JOGADOR ==================== -->
+  <div id="playerModal" class="modal" aria-hidden="true">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-content">
+      <button class="modal-close" id="closeModal" type="button" aria-label="Fechar">&times;</button>
+      <div class="modal-header-info">
+        <div class="modal-photo-wrap">
+          <img id="modalPhoto" alt="Foto do jogador" />
+        </div>
+        <div class="modal-player-info">
+          <h2 id="modalName"></h2>
+          <p id="modalPosition" class="modal-position"></p>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="modal-detail">
+          <span class="modal-label">Idade</span>
+          <span id="modalAge" class="modal-value"></span>
+        </div>
+        <div class="modal-detail">
+          <span class="modal-label">Altura</span>
+          <span id="modalHeight" class="modal-value"></span>
+        </div>
+        <div class="modal-detail">
+          <span class="modal-label">Nacionalidade</span>
+          <span id="modalNationality" class="modal-value"></span>
+        </div>
+        <div class="modal-detail">
+          <span class="modal-label">Clube de Base</span>
+          <span id="modalYouthClub" class="modal-value"></span>
+        </div>
+        <div class="modal-bio-section">
+          <h4>Biografia</h4>
+          <p id="modalBio"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/pt/b/b4/Sport_Club_Corinthians_Paulista.png"
+          alt="Escudo Corinthians"
+          class="footer-logo"
+        />
+        <div>
+          <strong>Sport Club Corinthians Paulista</strong>
+          <p>Fiel desde 1910</p>
+        </div>
+      </div>
+      <div class="footer-copy">
+        &copy; 2026 &mdash; Site nao-oficial feito com HTML, CSS e JavaScript puro.
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
