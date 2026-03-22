@@ -276,7 +276,7 @@ const formations = {
       { id: 'cm2', label: 'MEI', x: 50, y: 45 },
       { id: 'cm3', label: 'VOL', x: 35, y: 52 },
       { id: 'rw', label: 'PD', x: 80, y: 25 },
-      { id: 'st', label: 'CA', x: 50, y: 18 },
+      { id: 'st', label: 'ATA', x: 50, y: 18 },
       { id: 'lw', label: 'PE', x: 20, y: 25 },
     ],
   },
@@ -325,9 +325,28 @@ const formations = {
       { id: 'ram', label: 'PD', x: 78, y: 36 },
       { id: 'cam', label: 'MEI', x: 50, y: 38 },
       { id: 'lam', label: 'PE', x: 22, y: 36 },
-      { id: 'st', label: 'CA', x: 50, y: 18 },
+      { id: 'st', label: 'ATA', x: 50, y: 18 },
     ],
   },
+  '4-4-2-losango': {
+  label: '4-4-2 Losango',
+  slots: [
+    { id: 'gk',  label: 'GOL', x: 50, y: 90 },
+
+    { id: 'rb',  label: 'LD',  x: 85, y: 72 },
+    { id: 'cb1', label: 'ZAG', x: 62, y: 75 },
+    { id: 'cb2', label: 'ZAG', x: 38, y: 75 },
+    { id: 'lb',  label: 'LE',  x: 15, y: 72 },
+
+    { id: 'cm1', label: 'VOL', x: 50, y: 58 },
+    { id: 'cm2', label: 'MEI', x: 68, y: 46 },
+    { id: 'cm3', label: 'MEI', x: 32, y: 46 },
+    { id: 'cam', label: 'MEI', x: 50, y: 34 },
+
+    { id: 'st1', label: 'ATA', x: 60, y: 18 },
+    { id: 'st2', label: 'ATA', x: 40, y: 18 },
+  ],
+},
 };
 
 /* -------------------------------------------------------

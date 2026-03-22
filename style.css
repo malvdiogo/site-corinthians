@@ -68,6 +68,7 @@ header.scrolled { background: rgba(0,0,0,0.98); box-shadow: 0 4px 20px rgba(0,0,
   min-width: 650px;
   max-width: 900px;
   height: auto;
+  margin-bottom: 1px;
 }
 /* BOTOES */
 .btn { display: inline-flex; align-items: center; justify-content: center; padding: 14px 28px; border-radius: var(--radius); font-size: 14px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all var(--transition); text-decoration: none; }
