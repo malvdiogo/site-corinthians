@@ -260,6 +260,26 @@ const players = [
 ];
 
 /* -------------------------------------------------------
+   MAPA DE POSICOES PARA FILTRO
+   ------------------------------------------------------- */
+const positionMap = {
+  ATA: ["ATA", "CA", "SA", "PE", "PD"],
+  PD: ["PE", "PD"],
+  MD: ["PE", "PD"],
+  PE: ["PE", "PD"],
+  ME: ["PE", "PD"],
+  MEI: ["MEI", "MC", "MAT"],
+  VOL: ["VOL", "MC"],
+  ZAG: ["ZAG"],
+  LAT: ["LAT", "LE", "LD"],
+  LE: ["LAT", "LE"],
+  ALE: ["LAT", "LE"],
+  LD: ["LAT", "LD"],
+  ALD: ["LAT", "LE"],
+  GOL: ["GOL"]
+};
+
+/* -------------------------------------------------------
    FORMACOES DISPONIVEIS
    Cada formacao define as posicoes (x, y em %) no campo.
    ------------------------------------------------------- */
@@ -567,13 +587,19 @@ function assignedPlayerIds() {
 }
 
 // Filtra jogadores disponiveis para o picker
-function getPickerPlayers(searchTerm) {
+function getPickerPlayers(searchTerm, positionFilter) {
   var assigned = assignedPlayerIds();
   var term = (searchTerm || '').toLowerCase();
 
   return players.filter(function(p) {
     if (assigned.indexOf(p.id) !== -1) return false;
     if (term && p.name.toLowerCase().indexOf(term) === -1) return false;
+    // Novo filtro por posicao
+    if (positionFilter) {
+      const compatible = p.positions?.some(pos => positionMap[positionFilter]?.includes(pos)) ||
+                         positionMap[positionFilter]?.includes(p.position);
+      if (!compatible) return false;
+    }
     return true;
   });
 }
@@ -615,6 +641,8 @@ function renderFieldSlots() {
     btn.className = 'slot-btn';
     btn.style.left = slot.x + '%';
     btn.style.top = slot.y + '%';
+    // Adiciona dataset.position para identificacao da posicao
+    btn.dataset.position = slot.label;
 
     var assignedPlayerId = lineupState.assignments[slot.id];
     var assignedPlayer = assignedPlayerId
@@ -690,12 +718,13 @@ function renderPicker() {
   if (title) title.textContent = 'Escolha: ' + (currentSlot ? currentSlot.label : '');
 
   var searchTerm = search ? search.value : '';
-  var available = getPickerPlayers(searchTerm);
+  var positionFilter = currentSlot ? currentSlot.label : null;
+  var available = getPickerPlayers(searchTerm, positionFilter);
 
   list.innerHTML = '';
   empty.style.display = available.length === 0 ? 'block' : 'none';
   if (available.length === 0) {
-    empty.textContent = searchTerm ? 'Nenhum jogador encontrado' : 'Todos os jogadores ja foram escalados';
+    empty.textContent = positionFilter ? 'Nenhum jogador disponível para essa posição.' : 'Todos os jogadores ja foram escalados';
   }
 
   available.forEach(function(player) {
@@ -773,6 +802,34 @@ function setupHeader() {
    INICIALIZACAO
    ------------------------------------------------------- */
 function init() {
+  // Adiciona propriedade positions aos jogadores para compatibilidade
+  players.forEach(player => {
+    if (!player.positions) {
+      const positionMapping = {
+        "Goleiro": ["GOL"],
+        "Lateral Direito": ["LAT", "LD"],
+        "lateral esquerdo": ["LAT", "LE"],
+        "Zagueiro": ["ZAG"],
+        "zagueiro": ["ZAG"],
+        "Lateral Esquerdo": ["LAT", "LE"],
+        "lateral direito": ["LAT", "LD"],
+        "Volante": ["VOL", "MC"],
+        "volante": ["VOL", "MC"],
+        "volate": ["VOL", "MC"], // correcao de typo
+        "Meia": ["MEI", "MC"],
+        "meia": ["MEI", "MC"],
+        "Meia Atacante": ["MEI", "ATA"],
+        "Centroavante": ["ATA"],
+        "centroavante": ["ATA"],
+        "Ponta Direita": ["ATA", "PD"],
+        "ponta direita": ["ATA", "PD"],
+        "Ponta Esquerda": ["ATA", "PE"],
+        "ponta esquerda": ["ATA", "PE"]
+      };
+      player.positions = positionMapping[player.position] || [player.group];
+    }
+  });
+
   // Header
   setupHeader();
 
