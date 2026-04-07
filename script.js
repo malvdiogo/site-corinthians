@@ -264,10 +264,10 @@ const players = [
    ------------------------------------------------------- */
 const positionMap = {
   ATA: ["ATA", "CA", "SA", "PE", "PD"],
-  PD: ["PE", "PD"],
-  MD: ["PE", "PD"],
-  PE: ["PE", "PD"],
-  ME: ["PE", "PD"],
+  PD: ["PE", "PD", "ATA"],
+  MD: ["PE", "PD", "ATA"],
+  PE: ["PE", "PD", "ATA"],
+  ME: ["PE", "PD", "ATA"],
   MEI: ["MEI", "MC", "MAT"],
   VOL: ["VOL", "MC"],
   ZAG: ["ZAG"],
@@ -374,8 +374,8 @@ const formations = {
    ------------------------------------------------------- */
 const groupColors = {
   GOL: '#f59e0b',
-  DEF: '#3b82f6',
-  MEI: '#10b981',
+  DEF: '#f59e0b',
+  MEI: '#3b82f6',
   ATA: '#ef4444',
 };
 
@@ -815,7 +815,7 @@ function init() {
         "lateral direito": ["LAT", "LD"],
         "Volante": ["VOL", "MC"],
         "volante": ["VOL", "MC"],
-        "volate": ["VOL", "MC"], // correcao de typo
+        "volate": ["VOL", "MC"], 
         "Meia": ["MEI", "MC"],
         "meia": ["MEI", "MC"],
         "Meia Atacante": ["MEI", "ATA"],
