@@ -788,9 +788,17 @@ function setupHeader() {
       nav.classList.toggle('open');
     });
 
-    // Fecha menu ao clicar em link
+    // Fecha menu e adiciona scroll suave para links internos
     nav.querySelectorAll('.nav-link').forEach(function(link) {
-      link.addEventListener('click', function() {
+      link.addEventListener('click', function(event) {
+        var href = link.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          var target = document.getElementById(href.slice(1));
+          if (target) {
+            event.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
         hamburger.classList.remove('active');
         nav.classList.remove('open');
       });
